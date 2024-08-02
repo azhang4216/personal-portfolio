@@ -49,7 +49,7 @@ export const Banner = () => {
 
   const handleDownload = () => {
     const link = document.createElement('a');
-    link.href = '/AZ Resume.pdf';
+    link.href = 'azhang4216.github.io/public/AZ Resume.pdf';
     link.download = 'AZ Resume.pdf';
     link.click();
   };
