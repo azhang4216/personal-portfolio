@@ -166,22 +166,8 @@ export const Resume = () => {
         )
     });
 
-    // downloading PDF resume
-    const handleDownload = () => {
-      const link = document.createElement('a');
-      link.href = 'AZ Resume.pdf';
-      link.download = 'AZ Resume.pdf';
-      link.click();
-    };
-
     return (
       <section id="resume">
-        {/* <div className="resume-header">
-          <h1>Resume</h1>
-          <button className="btn btn-primary" onClick={handleDownload}>
-            Download it as a PDF!
-          </button>
-        </div> */}
         <div className="row education">
           <motion.div
             ref={refEduTitle}
