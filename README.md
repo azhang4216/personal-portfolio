@@ -1,6 +1,6 @@
 # Angela's Personal Portfolio Website
 
-Welcome to my personal portfolio website! This project is a single-page application (SPA) built with React to showcase my work, skills, and contact information.
+Welcome to my personal portfolio website! This project is a single-page application (SPA) built with React to showcase my work, skills, and contact information. You can check out the live website [here](https://azhang4216.github.io/personal-portfolio/).
 
 ## Table of Contents
 
