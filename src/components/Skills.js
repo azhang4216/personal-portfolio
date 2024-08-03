@@ -1,12 +1,5 @@
-import meter1 from "../assets/img/meter1.svg";
-import meter2 from "../assets/img/meter2.svg";
-import meter3 from "../assets/img/meter3.svg";
 import Carousel from 'react-multi-carousel';
-
 import 'react-multi-carousel/lib/styles.css';
-import arrow1 from "../assets/img/arrow1.svg";
-import arrow2 from "../assets/img/arrow2.svg";
-import colorSharp from "../assets/img/color-sharp.png"
 import { ProjectCard } from "./ProjectCard";
 
 import spbImg from "../assets/portfolio/01.png";
@@ -89,7 +82,7 @@ export const Skills = () => {
                 <div className="col-12">
                     <div className="skill-bx wow zoomIn">
                         <h2>Projects</h2>
-                        <p>Check out some of my featured works!</p>
+                        <p>Scroll through some of my featured works!</p>
                         <Carousel responsive={responsive} infinite={true} margin="20px" className="owl-carousel owl-theme skill-slider">
                           {
                             projects.map((project, index) => {
@@ -101,28 +94,12 @@ export const Skills = () => {
                               )
                             })
                           }
-                            {/* <div className="item">
-                                <img src={meter1} alt="" />
-                                <h5>Web Development</h5>
-                            </div>
-                            <div className="item">
-                                <img src={meter2} alt="" />
-                                <h5>Brand Identity</h5>
-                            </div>
-                            <div className="item">
-                                <img src={meter3} alt="" />
-                                <h5>Logo Design</h5>
-                            </div>
-                            <div className="item">
-                                <img src={meter1} alt="" />
-                                <h5>Web Development</h5>
-                            </div> */}
                         </Carousel>
                     </div>
                 </div>
             </div>
         </div>
-        <img className="background-image-left" src={colorSharp} alt="Image" />
+        {/* <img className="background-image-left" src={colorSharp} alt="" /> */}
     </section>
   )
 }

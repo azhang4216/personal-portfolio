@@ -66,3 +66,4 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 I've consulted several sources to create this project. These are the links:
 * [Deploying React App to Github Pages](https://www.youtube.com/watch?v=Q9n2mLqXFpU)
 * Using [React Bootstrap](https://react-bootstrap.netlify.app/)
+* [Scroll Animations] (https://blog.logrocket.com/react-scroll-animations-framer-motion/)

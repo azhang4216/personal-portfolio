@@ -4,6 +4,8 @@ import headerImg from "../assets/img/banner-angela.png";
 import { ArrowRightCircle } from 'react-bootstrap-icons';
 import 'animate.css';
 import TrackVisibility from 'react-on-screen';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faDownload } from '@fortawesome/free-solid-svg-icons';
 
 export const Banner = () => {
   const [loopNum, setLoopNum] = useState(0);
@@ -49,7 +51,7 @@ export const Banner = () => {
 
   const handleDownload = () => {
     const link = document.createElement('a');
-    link.href = 'azhang4216.github.io/public/AZ Resume.pdf';
+    link.href = 'AZ Resume.pdf';
     link.download = 'AZ Resume.pdf';
     link.click();
   };
@@ -74,7 +76,8 @@ export const Banner = () => {
                   Former FDE Intern @ Palantir
                 </h2>
                 <button className="btn btn-primary" onClick={handleDownload}>
-                  Check out my CV!
+                  <FontAwesomeIcon icon={faDownload} style={{ marginRight: '8px' }} />
+                  Download My Resume!
                 </button>
               </div>}
             </TrackVisibility>
