@@ -71,7 +71,7 @@ export const Banner = () => {
                   </span>
                 </h1>
                 <h2>
-                  B.A. Computer Science '25 @ Columbia University<br />
+                  B.A. Computer Science '26 @ Columbia University<br />
                   Former SDE Intern @ AWS Lambda<br />
                   Former FDE Intern @ Palantir
                 </h2>
