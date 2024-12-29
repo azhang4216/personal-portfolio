@@ -44,7 +44,7 @@ export const Resume = () => {
 
     const educationItems = [
         {
-          "school":"B.A. in CS @ Columbia University (Transfer), '25",
+          "school":"B.A. in CS @ Columbia University (Transfer), '26",
           "description":"• 4.16/4.00 GPA, Dean's List\n• Recruited Division I Athlete",
           "ref": refEdu1,
           "control": control2
