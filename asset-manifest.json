@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/personal-portfolio/static/css/main.15f8e95d.css",
-    "main.js": "/personal-portfolio/static/js/main.8e81e02d.js",
-    "static/js/453.b21437c2.chunk.js": "/personal-portfolio/static/js/453.b21437c2.chunk.js",
-    "static/media/banner-angela.png": "/personal-portfolio/static/media/banner-angela.7f066400515e8178a032.png",
-    "static/media/CentraNo2-Bold.ttf": "/personal-portfolio/static/media/CentraNo2-Bold.2faff7f7d3fc92a2fcd9.ttf",
-    "static/media/CentraNo2-Medium.ttf": "/personal-portfolio/static/media/CentraNo2-Medium.f94be5b326d78bb32b95.ttf",
-    "static/media/CentraNo2-Book.ttf": "/personal-portfolio/static/media/CentraNo2-Book.2b143fa4b734a3584043.ttf",
-    "static/media/revicons.eot": "/personal-portfolio/static/media/revicons.a77de540a38981833f9e.eot",
-    "static/media/revicons.ttf": "/personal-portfolio/static/media/revicons.57fd05d4ae650374c8de.ttf",
-    "static/media/revicons.woff": "/personal-portfolio/static/media/revicons.e8746a624ed098489406.woff",
-    "static/media/github-icon.svg": "/personal-portfolio/static/media/github-icon.758c09107b2ea5501bc71906628f6466.svg",
-    "index.html": "/personal-portfolio/index.html",
-    "static/media/linkedin-icon.svg": "/personal-portfolio/static/media/linkedin-icon.721d5414c26365f117e71d46b6641cb2.svg",
-    "static/media/calendar-icon.svg": "/personal-portfolio/static/media/calendar-icon.4929b734aad40bb9c21f87f50b5293b7.svg",
-    "static/media/email-icon.svg": "/personal-portfolio/static/media/email-icon.f776c9ecf46bbab1a032c7e9de04d82c.svg",
-    "main.15f8e95d.css.map": "/personal-portfolio/static/css/main.15f8e95d.css.map",
-    "main.8e81e02d.js.map": "/personal-portfolio/static/js/main.8e81e02d.js.map",
-    "453.b21437c2.chunk.js.map": "/personal-portfolio/static/js/453.b21437c2.chunk.js.map"
+    "main.css": "/static/css/main.d845791a.css",
+    "main.js": "/static/js/main.fbee3e23.js",
+    "static/js/453.b21437c2.chunk.js": "/static/js/453.b21437c2.chunk.js",
+    "static/media/banner-angela.png": "/static/media/banner-angela.7f066400515e8178a032.png",
+    "static/media/CentraNo2-Bold.ttf": "/static/media/CentraNo2-Bold.2faff7f7d3fc92a2fcd9.ttf",
+    "static/media/CentraNo2-Medium.ttf": "/static/media/CentraNo2-Medium.f94be5b326d78bb32b95.ttf",
+    "static/media/CentraNo2-Book.ttf": "/static/media/CentraNo2-Book.2b143fa4b734a3584043.ttf",
+    "static/media/revicons.eot": "/static/media/revicons.a77de540a38981833f9e.eot",
+    "static/media/revicons.ttf": "/static/media/revicons.57fd05d4ae650374c8de.ttf",
+    "static/media/revicons.woff": "/static/media/revicons.e8746a624ed098489406.woff",
+    "static/media/github-icon.svg": "/static/media/github-icon.758c09107b2ea5501bc71906628f6466.svg",
+    "static/media/linkedin-icon.svg": "/static/media/linkedin-icon.721d5414c26365f117e71d46b6641cb2.svg",
+    "index.html": "/index.html",
+    "static/media/calendar-icon.svg": "/static/media/calendar-icon.4929b734aad40bb9c21f87f50b5293b7.svg",
+    "static/media/email-icon.svg": "/static/media/email-icon.f776c9ecf46bbab1a032c7e9de04d82c.svg",
+    "main.d845791a.css.map": "/static/css/main.d845791a.css.map",
+    "main.fbee3e23.js.map": "/static/js/main.fbee3e23.js.map",
+    "453.b21437c2.chunk.js.map": "/static/js/453.b21437c2.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.15f8e95d.css",
-    "static/js/main.8e81e02d.js"
+    "static/css/main.d845791a.css",
+    "static/js/main.fbee3e23.js"
   ]
 }
