@@ -1,60 +1,15 @@
-import { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import headerImg from "../assets/img/banner-angela.png";
-import { ArrowRightCircle } from 'react-bootstrap-icons';
 import 'animate.css';
 import TrackVisibility from 'react-on-screen';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDownload } from '@fortawesome/free-solid-svg-icons';
 
 export const Banner = () => {
-  const [loopNum, setLoopNum] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [text, setText] = useState('');
-  const [delta, setDelta] = useState(300 - Math.random() * 100);
-  const [_index, setIndex] = useState(1);
-  const toRotate = ["software developer.", "D1 student-athlete."];
-  const period = 800; // deletion speed
-
-  useEffect(() => {
-    let ticker = setInterval(() => {
-      tick();
-    }, delta);
-
-    return () => { clearInterval(ticker) };
-  }, [text])
-
-  const tick = () => {
-    let i = loopNum % toRotate.length;
-    let fullText = toRotate[i];
-    let updatedText = isDeleting ? fullText.substring(0, text.length - 1) : fullText.substring(0, text.length + 1);
-
-    setText(updatedText);
-
-    if (isDeleting) {
-      setDelta(prevDelta => prevDelta / 2);
-    }
-
-    if (!isDeleting && updatedText === fullText) {
-      setIsDeleting(true);
-      setIndex(prevIndex => prevIndex - 1);
-      setDelta(period);
-    } else if (isDeleting && updatedText === '') {
-      setIsDeleting(false);
-      setLoopNum(loopNum + 1);
-      setIndex(1);
-      setDelta(350); // typing speed
-    } else {
-      setIndex(prevIndex => prevIndex + 1);
-    }
-  }
-
-  const handleDownload = () => {
-    const link = document.createElement('a');
-    link.href = 'AZ Resume.pdf';
-    link.download = 'AZ Resume.pdf';
-    link.click();
-  };
+  // const handleDownload = () => {
+  //   const link = document.createElement('a');
+  //   link.href = 'AZ Resume.pdf';
+  //   link.download = 'AZ Resume.pdf';
+  //   link.click();
+  // };
 
   return (
     <section className="banner" id="home">
@@ -64,28 +19,33 @@ export const Banner = () => {
             <TrackVisibility>
               {({ isVisible }) =>
               <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
-                <h1 className="mt-auto">
-                  {`Hi! I'm Angela, a `} 
-                  <span className="txt-rotate" dataPeriod="1000" data-rotate='["software developer.", "D1 student-athlete."]'>
-                    <span className="wrap">{text}</span>
-                  </span>
-                </h1>
+                <h1 className="mt-auto">Angela Zhang</h1>
                 <h2>
-                  B.A. Computer Science '26 @ Columbia University<br />
-                  Former SDE Intern @ AWS Lambda<br />
-                  Former FDE Intern @ Palantir
+                  CTO @{" "}
+                  <a
+                    className="pier-link"
+                    href="https://www.pier-finance.com/"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Pier
+                  </a>{" "}
+                  | Ex-Cohere, AWS, Palantir
                 </h2>
-                <button className="btn btn-primary" onClick={handleDownload}>
+                <p>
+                  Data ingesting. AI agent-ing. Fullstack engineering. Occasionally golfing.
+                </p>
+                {/* <button className="btn btn-primary" onClick={handleDownload}>
                   <FontAwesomeIcon icon={faDownload} style={{ marginRight: '8px' }} />
-                  Download My Resume!
-                </button>
+                  Download Resume
+                </button> */}
               </div>}
             </TrackVisibility>
           </Col>
           <Col xs={12} md={6} xl={5}>
             <TrackVisibility>
               {({ isVisible }) =>
-                <div className={isVisible ? "animate__animated animate__zoomIn" : ""}>
+                <div className={isVisible ? "banner-image-wrap is-visible" : "banner-image-wrap"}>
                   <img src={headerImg} alt="Header Img"/>
                 </div>}
             </TrackVisibility>
