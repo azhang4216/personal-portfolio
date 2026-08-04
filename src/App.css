@@ -102,6 +102,7 @@
 .shot-start, .shot-end { fill: #c94f37; }
 .course-pin { stroke: #173f2c; stroke-width: 2; }
 .course-pin-flag { fill: #c94f37; stroke: #173f2c; stroke-width: 1.5; }
+.course-pin-initials { fill: #f4eddd; stroke: none; font: 700 8px "Centra", Arial, sans-serif; letter-spacing: -.2px; }
 .course-note { fill: #4e554d; font: 19px "Bradley Hand", "Segoe Print", cursive; }
 .water-note { font-size: 16px; transform: rotate(4deg); transform-origin: 208px 350px; }
 .miss-note { transform: rotate(-3deg); transform-origin: 218px 176px; }

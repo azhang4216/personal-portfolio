@@ -32,6 +32,7 @@ const CourseDrawing = () => (
     <circle className="shot-end" cx="378" cy="139" r="6" />
     <path className="course-pin" d="M379 141V87" />
     <path className="course-pin-flag" d="M381 88h36l-13 12 13 12h-36Z" />
+    <text className="course-pin-initials" x="387" y="103">AZ</text>
     <text className="course-note water-note" x="208" y="350">water left, 50y carry</text>
     <ellipse className="miss-circle" cx="257" cy="170" rx="52" ry="25" />
     <text className="course-note miss-note" x="218" y="176">miss here</text>
