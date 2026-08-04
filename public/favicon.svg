@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+  <rect width="48" height="48" rx="10" fill="#e6ddcd"/>
+  <g fill="none" stroke="#173f2c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M17 40V9M18 10h20l-8 8 8 8H18"/>
+    <ellipse cx="17" cy="40" rx="10" ry="3.5"/>
+  </g>
+  <text x="21" y="20" fill="#173f2c" font-family="Arial, sans-serif" font-size="5.5" font-weight="700">AZ</text>
+  <circle cx="17" cy="40" r="2.8" fill="#173f2c"/>
+</svg>
