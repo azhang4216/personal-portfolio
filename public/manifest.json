@@ -1,6 +1,6 @@
 {
   "short_name": "Angela Zhang",
-  "name": "Angela Zhang — CTO, Engineer, D1 Golfer",
+  "name": "Angela Zhang — CTO & AI Systems Architect",
   "icons": [
     {
       "src": "favicon.svg",
@@ -20,6 +20,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#173f2c",
-  "background_color": "#e6ddcd"
+  "theme_color": "#0d3628",
+  "background_color": "#eee9db"
 }

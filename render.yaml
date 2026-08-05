@@ -1,0 +1,37 @@
+services:
+  - type: web
+    name: angela-portfolio-scheduler
+    runtime: node
+    plan: starter
+    rootDir: scheduler-api
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /v1/health
+    autoDeployTrigger: commit
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: ALLOWED_ORIGINS
+        value: https://angela-zhang.org,https://www.angela-zhang.org
+      - key: BOOKING_OWNER_EMAIL
+        value: angela@pier-finance.com
+      - key: BOOKING_DEFAULT_TIME_ZONE
+        value: America/Vancouver
+      - key: BOOKING_MIN_NOTICE_MINUTES
+        value: "120"
+      - key: BOOKING_MAX_ADVANCE_DAYS
+        value: "21"
+      - key: BOOKING_BUFFER_MINUTES
+        value: "15"
+      - key: BOOKING_WORKING_HOURS_JSON
+        value: '{"1":[["09:00","17:00"]],"2":[["09:00","17:00"]],"3":[["09:00","17:00"]],"4":[["09:00","17:00"]],"5":[["09:00","16:00"]]}'
+      - key: GOOGLE_OAUTH_CLIENT_ID
+        sync: false
+      - key: GOOGLE_OAUTH_CLIENT_SECRET
+        sync: false
+      - key: GOOGLE_OAUTH_REFRESH_TOKEN
+        sync: false
+      - key: GOOGLE_BOOKING_CALENDAR_ID
+        sync: false
+      - key: GOOGLE_FREEBUSY_CALENDAR_IDS
+        sync: false

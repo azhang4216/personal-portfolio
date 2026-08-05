@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
 import linkedinIcon from '../assets/img/linkedin-icon.svg';
 import githubIcon from '../assets/img/github-icon.svg';
-import emailIcon from '../assets/img/email-icon.svg';
-import calendarIcon from '../assets/img/calendar-icon.svg';
 import {
   BrowserRouter as Router
 } from "react-router-dom";
@@ -62,17 +60,6 @@ export const NavBar = () => {
                   rel="noreferrer"
                 >
                   <img src={githubIcon} alt="GitHub" />
-                </a>
-                <a className="email" href="mailto:angela@pier-finance.com">
-                  <img src={emailIcon} alt="Email" />
-                </a>
-                <a
-                  className="calendly"
-                  href="https://calendly.com/angela-pier-finance/30min"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <img src={calendarIcon} alt="Calendly" />
                 </a>
               </div>
             </span>

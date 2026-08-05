@@ -1,69 +1,50 @@
-# Angela's Personal Portfolio Website
+# Angela Zhang — Portfolio
 
-Welcome to my personal portfolio website! This project is a single-page application (SPA) built with React to showcase my work, skills, and contact information. You can check out the live website [here](https://azhang4216.github.io/personal-portfolio/).
+A recruiter-focused portfolio for [angela-zhang.org](https://angela-zhang.org): an animated code-native landing, career scorecard, searchable project archive with live public GitHub activity, and a private Google Calendar scheduling flow.
 
-## Table of Contents
+## Architecture
 
-- [Demo](#demo)
-- [Features](#features)
-- [Installation](#installation)
-- [Project Structure](#project-structure)
-- [Credits](#credits)
-- [License](#license)
+- `src/` — React single-page portfolio deployed as a static site.
+- `scheduler-api/` — standalone Node/Express scheduling service intended for Render.
+- `render.yaml` — Render Blueprint for the scheduling service.
 
-## Demo
+Google credentials never enter the React bundle. The browser receives only available timestamps; raw busy ranges, calendar IDs, and event details remain inside the scheduling API.
 
-You can view the live version of the website on Github Pages [here](https://azhang4216.github.io/personal-portfolio/).
+## Run the portfolio
 
-## Features
+```bash
+npm install
+npm start
+```
 
-- **Home Page:** Introduction and a brief overview of who I am.
-- **About Me:** More detailed information about my background, education, and interests.
-- **Projects:** A showcase of my projects with descriptions, screenshots, and links to repositories.
-- **Skills:** A list of my technical skills with proficiency levels.
-- **Contact:** A form to get in touch with me directly through the website.
-- **Responsive Design:** Optimized for both desktop and mobile devices.
+To connect the local scheduler, copy `.env.example` to `.env.local` and set:
 
-## Installation
+```text
+REACT_APP_SCHEDULING_API_URL=http://localhost:8787
+```
 
-To run this project locally, follow these steps:
+Before publishing to GitHub Pages, put the deployed Render URL in the ignored `.env.production.local` file:
 
-1. **Clone the repository:**
-   ```sh
-   git clone https://github.com/your-username/your-portfolio.git
-   cd your-portfolio
-   ```
+```text
+REACT_APP_SCHEDULING_API_URL=https://your-service.onrender.com
+```
 
-2. **Available Scripts**
+## Run the scheduling API
 
-In the project directory, you can run:
+See [scheduler-api/README.md](scheduler-api/README.md) for the Google OAuth, three-calendar free/busy, secondary booking calendar, and Render setup.
 
-### `npm start`
+```bash
+cd scheduler-api
+npm install
+npm test
+npm run dev
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Verify and build
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```bash
+CI=true npm test -- --watchAll=false
+npm run build
+```
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-## Credits
-
-I've consulted several sources to create this project. These are the links:
-* [Deploying React App to Github Pages](https://www.youtube.com/watch?v=Q9n2mLqXFpU)
-* Using [React Bootstrap](https://react-bootstrap.netlify.app/)
-* [Scroll Animations] (https://blog.logrocket.com/react-scroll-animations-framer-motion/)
+The static build is written to `build/`. The existing `npm run deploy` script publishes it to GitHub Pages.
