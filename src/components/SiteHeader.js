@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { GitHubIcon, LinkedInIcon } from "./PortfolioIcons";
+import { CalendarIcon, GitHubIcon, GolfFlagMark, LinkedInIcon } from "./PortfolioIcons";
 import { LINKS } from "../data/portfolio";
 
 const NAV_ITEMS = [
@@ -64,14 +64,14 @@ export function SiteHeader() {
     <>
       <header className={`site-header ${visible || menuOpen ? "is-visible" : "is-hidden"}`}>
         <div className="header-shell">
-          <a className="az-mark desktop-mark" href="#top" aria-label="Angela Zhang, back to top">AZ</a>
+          <a className="az-mark desktop-mark" href="/" aria-label="Angela Zhang, back to top"><GolfFlagMark /></a>
           <nav className="desktop-nav" aria-label="Primary navigation">
             {NAV_ITEMS.map(([label, href]) => <a key={href} href={href}>{label}</a>)}
           </nav>
           <div className="header-links">
             <a className="header-social" href={LINKS.linkedin} target="_blank" rel="noreferrer" aria-label="Angela on LinkedIn"><LinkedInIcon /></a>
             <a className="header-social" href={LINKS.github} target="_blank" rel="noreferrer" aria-label="Angela on GitHub"><GitHubIcon /></a>
-            <a className="resume-link" href={LINKS.resume} target="_blank" rel="noreferrer">Résumé <span aria-hidden="true">↗</span></a>
+            <a className="header-calendar-link" href="#connect" aria-label="Schedule a conversation with Angela"><CalendarIcon /></a>
           </div>
 
           <button
@@ -83,7 +83,7 @@ export function SiteHeader() {
             aria-controls="mobile-navigation"
             onClick={() => setMenuOpen((open) => !open)}
           >
-            <span className="mobile-az">AZ</span>
+            <span className="mobile-az"><GolfFlagMark /></span>
             <span className="menu-lines" aria-hidden="true"><i /><i /></span>
           </button>
         </div>
@@ -94,13 +94,12 @@ export function SiteHeader() {
           {NAV_ITEMS.map(([label, href], index) => (
             <a key={href} href={href} tabIndex={menuOpen ? 0 : -1} onClick={closeMenu}><span>0{index + 1}</span>{label}</a>
           ))}
-          <a href={LINKS.resume} target="_blank" rel="noreferrer" tabIndex={menuOpen ? 0 : -1} onClick={closeMenu}><span>04</span>Résumé</a>
         </nav>
         <div className="mobile-socials">
           <a href={LINKS.linkedin} target="_blank" rel="noreferrer" tabIndex={menuOpen ? 0 : -1}><LinkedInIcon /> LinkedIn</a>
           <a href={LINKS.github} target="_blank" rel="noreferrer" tabIndex={menuOpen ? 0 : -1}><GitHubIcon /> GitHub</a>
         </div>
-        <p>Vancouver / San Francisco · <span>Available worldwide</span></p>
+        <p>San Francisco / New York · <span>Available worldwide</span></p>
       </div>
     </>
   );

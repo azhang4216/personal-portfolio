@@ -2,6 +2,7 @@ import express from "express";
 import helmet from "helmet";
 import { ipKeyGenerator, rateLimit } from "express-rate-limit";
 import { createBookingEvent, getBusyIntervals, GoogleApiError, reconcileBookingResponses } from "./google-calendar.js";
+import { getGitHubContributions } from "./github-contributions.js";
 import {
   ALLOWED_DURATIONS,
   buildAvailableSlots,
@@ -74,6 +75,17 @@ app.use("/v1", rateLimit({
   standardHeaders: "draft-8",
   legacyHeaders: false,
 }));
+
+app.get("/v1/github/contributions", async (_request, response) => {
+  try {
+    const contributions = await getGitHubContributions();
+    response.setHeader("Cache-Control", "public, max-age=300, s-maxage=1800, stale-while-revalidate=86400");
+    return response.json(contributions);
+  } catch (error) {
+    console.error(JSON.stringify({ message: "github_contributions_failed", error: error.name || "Error" }));
+    return response.status(502).json({ message: "GitHub activity is temporarily unavailable." });
+  }
+});
 
 const bookingLimiter = rateLimit({
   windowMs: 15 * 60_000,

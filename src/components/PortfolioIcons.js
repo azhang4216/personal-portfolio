@@ -4,6 +4,15 @@ export const ArrowIcon = ({ diagonal = false }) => (
   </svg>
 );
 
+export const GolfFlagMark = () => (
+  <svg className="golf-flag-mark" viewBox="0 0 48 48" aria-hidden="true">
+    <path className="golf-flag-line" d="M15 40V8M16 9h23L29 18l10 9H16" />
+    <text className="golf-flag-initials" x="19.5" y="18.5">AZ</text>
+    <ellipse className="golf-flag-hole" cx="15" cy="40" rx="10" ry="3.5" />
+    <circle className="golf-flag-ball" cx="15" cy="40" r="2.5" />
+  </svg>
+);
+
 export const LinkedInIcon = () => (
   <svg viewBox="0 0 24 24" aria-hidden="true">
     <path d="M6.5 8.4H3.3V19h3.2V8.4ZM4.9 3a1.9 1.9 0 1 0 0 3.8A1.9 1.9 0 0 0 4.9 3ZM20.7 12.9c0-3.2-1.7-4.8-4-4.8-1.9 0-2.7 1-3.2 1.8V8.4h-3.2V19h3.2v-5.2c0-1.4.3-2.8 2.1-2.8 1.7 0 1.8 1.6 1.8 2.9V19h3.3v-6.1Z" />

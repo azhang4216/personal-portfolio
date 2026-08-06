@@ -2,7 +2,6 @@ export const LINKS = {
   linkedin: "https://www.linkedin.com/in/angela-zl-zhang/",
   github: "https://github.com/azhang4216",
   email: "mailto:angela@pier-finance.com",
-  resume: `${process.env.PUBLIC_URL || ""}/AZ%20Resume.pdf`,
 };
 
 export const ROLES = [

@@ -5,10 +5,10 @@ A recruiter-focused portfolio for [angela-zhang.org](https://angela-zhang.org): 
 ## Architecture
 
 - `src/` — React single-page portfolio deployed as a static site.
-- `scheduler-api/` — standalone Node/Express scheduling service intended for Render.
+- `scheduler-api/` — standalone Node/Express service for private scheduling and a cached, normalized view of Angela's public GitHub contribution graph.
 - `render.yaml` — Render Blueprint for the scheduling service.
 
-Google credentials never enter the React bundle. The browser receives only available timestamps; raw busy ranges, calendar IDs, and event details remain inside the scheduling API.
+Google credentials never enter the React bundle. The browser receives only available timestamps; raw busy ranges, calendar IDs, and event details remain inside the scheduling API. The GitHub endpoint proxies only the same public contribution counts visible on Angela's profile and requires no GitHub credential.
 
 ## Run the portfolio
 

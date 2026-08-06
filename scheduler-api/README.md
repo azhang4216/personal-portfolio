@@ -25,7 +25,7 @@ The OAuth scopes are limited to free/busy reads and events on calendars Angela o
 - `calendar.freebusy`
 - `calendar.events.owned`
 
-Because the event is created on the secondary booking calendar and Angela is invited as an attendee, the invitation can be accepted or declined from Google Calendar. The booking calendar is also checked as busy, so pending requests reserve their slot. The API reconciles responses before availability checks: an acceptance confirms the organizer event, while a decline cancels it with `sendUpdates=all`, notifies the visitor, and reopens the slot.
+Because the event is created on the secondary booking calendar and Angela is invited as an attendee, the invitation can be accepted or declined from Google Calendar. Each event is titled `<Angela / Guest Name> 1:1`, and Angela and the visitor can see the full two-person guest list. The booking calendar is also checked as busy, so pending requests reserve their slot. The API reconciles responses before availability checks: an acceptance confirms the organizer event, while a decline cancels it with `sendUpdates=all`, notifies the visitor, and reopens the slot.
 
 ## Local development
 
@@ -40,6 +40,7 @@ npm run dev
 The service listens on `PORT` or `8787` and exposes:
 
 - `GET /v1/health`
+- `GET /v1/github/contributions`
 - `GET /v1/availability?duration=15&timeZone=America%2FVancouver`
 - `POST /v1/book`
 

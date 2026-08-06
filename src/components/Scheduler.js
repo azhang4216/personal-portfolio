@@ -135,9 +135,9 @@ export function Scheduler() {
     <section className="connect-section" id="connect">
       <div className="site-container">
         <div className="section-heading connect-heading">
-          <div><span className="section-kicker">Let’s connect</span><h2>Good conversations<br />start here.</h2></div>
+          <div><h2>Let’s connect</h2></div>
           <div className="connect-intro">
-            <p>Recruiting, a hard technical problem, a thoughtful collaboration—or a round of golf. Pick a time and tell me what’s on your mind.</p>
+            <p>Pick a time. Let’s chat.</p>
             <div className="connect-socials">
               <a href={LINKS.linkedin} target="_blank" rel="noreferrer"><LinkedInIcon /> LinkedIn <ArrowIcon diagonal /></a>
               <a href={LINKS.github} target="_blank" rel="noreferrer"><GitHubIcon /> GitHub <ArrowIcon diagonal /></a>

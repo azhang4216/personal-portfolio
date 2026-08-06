@@ -76,47 +76,51 @@ export async function getBusyIntervals(config, timeMin, timeMax) {
   return mergeBusyCalendars(data.calendars);
 }
 
+export function bookingEventPayload(config, booking) {
+  const end = new Date(Date.parse(booking.start) + booking.duration * 60_000).toISOString();
+  return {
+    id: calendarEventId(booking.start),
+    summary: `<Angela / ${booking.name}> 1:1`,
+    description: `Requested through angela-zhang.org.\n\nVisitor: ${booking.name}\nVisitor timezone: ${booking.timeZone}\n\nAngela: respond Yes or No to this invitation from Google Calendar.`,
+    visibility: "private",
+    transparency: "opaque",
+    status: "tentative",
+    guestsCanInviteOthers: false,
+    guestsCanModify: false,
+    guestsCanSeeOtherGuests: true,
+    start: { dateTime: booking.start, timeZone: booking.timeZone },
+    end: { dateTime: end, timeZone: booking.timeZone },
+    attendees: [
+      { email: config.ownerEmail, responseStatus: "needsAction" },
+      { email: booking.email, displayName: booking.name, responseStatus: "needsAction" },
+    ],
+    conferenceData: {
+      createRequest: {
+        requestId: randomUUID(),
+        conferenceSolutionKey: { type: "hangoutsMeet" },
+      },
+    },
+    reminders: { useDefault: true },
+    extendedProperties: {
+      private: {
+        source: "portfolio-scheduler",
+        requestId: booking.idempotencyKey,
+      },
+    },
+  };
+}
+
 export async function createBookingEvent(config, booking) {
-  const startMs = Date.parse(booking.start);
-  const end = new Date(startMs + booking.duration * 60_000).toISOString();
+  const end = new Date(Date.parse(booking.start) + booking.duration * 60_000).toISOString();
   const calendarId = encodeURIComponent(config.bookingCalendarId);
-  const eventId = calendarEventId(booking.start);
+  const event = bookingEventPayload(config, booking);
   const response = await authorizedFetch(
     config,
     `${CALENDAR_API}/calendars/${calendarId}/events?conferenceDataVersion=1&sendUpdates=all`,
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        id: eventId,
-        summary: `Portfolio conversation · ${booking.duration} min`,
-        description: `Requested through angela-zhang.org.\n\nVisitor: ${booking.name}\nVisitor timezone: ${booking.timeZone}\n\nAngela: respond Yes or No to this invitation from Google Calendar.`,
-        visibility: "private",
-        transparency: "opaque",
-        status: "tentative",
-        guestsCanInviteOthers: false,
-        guestsCanModify: false,
-        guestsCanSeeOtherGuests: false,
-        start: { dateTime: booking.start, timeZone: booking.timeZone },
-        end: { dateTime: end, timeZone: booking.timeZone },
-        attendees: [
-          { email: config.ownerEmail, responseStatus: "needsAction" },
-          { email: booking.email, displayName: booking.name, responseStatus: "needsAction" },
-        ],
-        conferenceData: {
-          createRequest: {
-            requestId: randomUUID(),
-            conferenceSolutionKey: { type: "hangoutsMeet" },
-          },
-        },
-        reminders: { useDefault: true },
-        extendedProperties: {
-          private: {
-            source: "portfolio-scheduler",
-            requestId: booking.idempotencyKey,
-          },
-        },
-      }),
+      body: JSON.stringify(event),
     },
   );
   const data = await responseJson(response);

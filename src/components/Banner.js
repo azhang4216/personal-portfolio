@@ -4,13 +4,6 @@ import 'animate.css';
 import TrackVisibility from 'react-on-screen';
 
 export const Banner = () => {
-  // const handleDownload = () => {
-  //   const link = document.createElement('a');
-  //   link.href = 'AZ Resume.pdf';
-  //   link.download = 'AZ Resume.pdf';
-  //   link.click();
-  // };
-
   return (
     <section className="banner" id="home">
       <Container>
@@ -35,10 +28,6 @@ export const Banner = () => {
                 <p>
                   Data ingesting. AI agent-ing. Fullstack engineering. Occasionally golfing.
                 </p>
-                {/* <button className="btn btn-primary" onClick={handleDownload}>
-                  <FontAwesomeIcon icon={faDownload} style={{ marginRight: '8px' }} />
-                  Download Resume
-                </button> */}
               </div>}
             </TrackVisibility>
           </Col>
