@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse">
+      <path d="M28 0H0V28" fill="none" stroke="#d9e88e" stroke-opacity=".08"/>
+    </pattern>
+    <linearGradient id="fade" x1="0" x2="1">
+      <stop offset="0" stop-color="#09291f" stop-opacity="1"/>
+      <stop offset=".62" stop-color="#09291f" stop-opacity=".72"/>
+      <stop offset="1" stop-color="#09291f" stop-opacity=".08"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#0d3628"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <g fill="#d9e88e" font-family="monospace" font-size="15" opacity=".45">
+    <text x="770" y="90">01  A Z  { }  10  &lt;AI/&gt;</text>
+    <text x="855" y="128">[SYSTEMS]  001101</text>
+    <text x="735" y="166">MULTI_AGENT :: BUILD</text>
+    <text x="930" y="204">0110  01  +  SHIP</text>
+    <text x="790" y="242">{DATA → DECISION}</text>
+    <text x="990" y="280">A Z  10  01</text>
+    <text x="720" y="318">[CUSTOMER]  [CODE]</text>
+    <text x="880" y="356">0011 :: LEAD</text>
+    <text x="760" y="394">&lt;FULL_STACK/&gt;  010</text>
+    <text x="960" y="432">{BUILD}  AZ</text>
+    <text x="810" y="470">AI_SYSTEMS :: 01</text>
+    <text x="730" y="508">1010  [SHIP]  { }  AZ</text>
+  </g>
+  <circle cx="955" cy="306" r="184" fill="none" stroke="#d9e88e" stroke-opacity=".22"/>
+  <circle cx="955" cy="306" r="112" fill="#d9e88e" fill-opacity=".07" stroke="#d9e88e" stroke-opacity=".34"/>
+  <path d="M700 520c72-116 154-206 253-265 52-31 103-51 153-60" fill="none" stroke="#c95b40" stroke-width="4" stroke-dasharray="8 10"/>
+  <rect width="1200" height="630" fill="url(#fade)"/>
+  <g fill="#f7f3e7">
+    <text x="74" y="88" font-family="Arial, sans-serif" font-size="16" font-weight="700" letter-spacing="3">CTO AT PIER · VANCOUVER / SAN FRANCISCO</text>
+    <text x="68" y="292" font-family="Georgia, serif" font-size="116" letter-spacing="-7">Angela</text>
+    <text x="68" y="400" fill="#d9e88e" font-family="Georgia, serif" font-size="116" font-style="italic" letter-spacing="-7">Zhang</text>
+    <text x="76" y="484" font-family="Georgia, serif" font-size="28">AI systems that turn complex data into decisions.</text>
+    <text x="76" y="554" fill="#aebbae" font-family="Arial, sans-serif" font-size="14" letter-spacing="2">COHERE · PALANTIR · AWS · FORMER D1 GOLFER</text>
+  </g>
+</svg>
