@@ -6,9 +6,9 @@ test('scales section-scroll duration in proportion to distance', () => {
   const careerDuration = scrollDurationForDistance(1000, 1000);
   const connectDuration = scrollDurationForDistance(6000, 1000);
 
-  expect(careerDuration).toBe(2200);
-  expect(connectDuration).toBe(10700);
-  expect((connectDuration - 500) / (careerDuration - 500)).toBe(6);
+  expect(careerDuration).toBe(1700);
+  expect(connectDuration).toBe(8200);
+  expect((connectDuration - 400) / (careerDuration - 400)).toBe(6);
 });
 
 test('renders the recruiter portfolio and primary sections', () => {
