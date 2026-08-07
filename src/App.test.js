@@ -1,5 +1,15 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import App from './App';
+import { scrollDurationForDistance } from './components/HashScrollManager';
+
+test('scales section-scroll duration in proportion to distance', () => {
+  const careerDuration = scrollDurationForDistance(1000, 1000);
+  const connectDuration = scrollDurationForDistance(6000, 1000);
+
+  expect(careerDuration).toBe(2200);
+  expect(connectDuration).toBe(10700);
+  expect((connectDuration - 500) / (careerDuration - 500)).toBe(6);
+});
 
 test('renders the recruiter portfolio and primary sections', () => {
   render(<App />);
@@ -55,7 +65,7 @@ test('restores a direct section link after the React app mounts', async () => {
   expect(scrollTo).toHaveBeenCalledWith({ top: 0, left: 0, behavior: 'instant' });
   await waitFor(() => {
     expect(scrollTo.mock.calls.some(([options]) => options.top > 0)).toBe(true);
-  }, { timeout: 1500 });
+  }, { timeout: 2000 });
 
   unmount();
   targetRect.mockRestore();

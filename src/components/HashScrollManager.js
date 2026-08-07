@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 
-const INITIAL_REVEAL_DELAY = 600;
-const PRIMARY_SCROLL_DURATION = 2200;
-const CORRECTION_SCROLL_DURATION = 700;
+const INITIAL_REVEAL_DELAY = 1000;
+const CRUISING_MILLISECONDS_PER_VIEWPORT = 1700;
+const EASING_RAMP_DURATION = 500;
+const MINIMUM_SCROLL_DURATION = 600;
 const SETTLE_WINDOW = 5000;
 const INTERRUPTION_EVENTS = ["wheel", "touchstart", "pointerdown", "keydown"];
 
@@ -19,6 +20,36 @@ function currentHashTarget() {
 
 function smoothStep(progress) {
   return progress * progress * (3 - (2 * progress));
+}
+
+function pacedProgress(elapsed, duration) {
+  if (duration <= EASING_RAMP_DURATION * 2) {
+    return smoothStep(Math.min(elapsed / duration, 1));
+  }
+
+  const cruisingScale = duration - EASING_RAMP_DURATION;
+  if (elapsed < EASING_RAMP_DURATION) {
+    return (elapsed * elapsed) / (2 * EASING_RAMP_DURATION * cruisingScale);
+  }
+
+  if (elapsed > duration - EASING_RAMP_DURATION) {
+    const remaining = duration - elapsed;
+    return 1 - ((remaining * remaining) / (2 * EASING_RAMP_DURATION * cruisingScale));
+  }
+
+  return (elapsed - (EASING_RAMP_DURATION / 2)) / cruisingScale;
+}
+
+export function scrollDurationForDistance(distance, viewportHeight = window.innerHeight) {
+  const normalizedDistance = Math.abs(distance);
+  if (normalizedDistance <= 1) return 0;
+
+  const safeViewportHeight = Math.max(viewportHeight, 1);
+  return Math.max(
+    MINIMUM_SCROLL_DURATION,
+    ((normalizedDistance / safeViewportHeight) * CRUISING_MILLISECONDS_PER_VIEWPORT)
+      + EASING_RAMP_DURATION
+  );
 }
 
 export function HashScrollManager() {
@@ -67,13 +98,13 @@ export function HashScrollManager() {
           previousHeight = nextHeight;
           if (displaced && heightChanged) {
             observer.disconnect();
-            animateToTarget(CORRECTION_SCROLL_DURATION);
+            animateToTarget(scrollDurationForDistance(target.getBoundingClientRect().top));
           }
         });
         observer.observe(document.body);
       };
 
-      const animateToTarget = (duration = PRIMARY_SCROLL_DURATION) => {
+      const animateToTarget = (duration) => {
         if (stopped || !target.isConnected) return;
         if (animationFrame) window.cancelAnimationFrame(animationFrame);
 
@@ -83,8 +114,9 @@ export function HashScrollManager() {
         const step = (timestamp) => {
           if (stopped || !target.isConnected) return;
 
-          const progress = Math.min((timestamp - startedAt) / duration, 1);
-          const nextY = startY + ((targetTop() - startY) * smoothStep(progress));
+          const elapsed = Math.max(timestamp - startedAt, 0);
+          const progress = Math.min(elapsed / duration, 1);
+          const nextY = startY + ((targetTop() - startY) * pacedProgress(elapsed, duration));
           window.scrollTo({ top: nextY, left: 0, behavior: "instant" });
 
           if (progress < 1) {
@@ -110,8 +142,10 @@ export function HashScrollManager() {
       });
 
       const moveToTarget = () => {
-        animateToTarget();
-        queueTimer(stop, PRIMARY_SCROLL_DURATION + SETTLE_WINDOW);
+        const distance = targetTop() - window.scrollY;
+        const duration = scrollDurationForDistance(distance);
+        animateToTarget(duration);
+        queueTimer(stop, duration + SETTLE_WINDOW);
       };
 
       if (revealPage && !reducedMotion) {
