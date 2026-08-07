@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 
-const INITIAL_REVEAL_DELAY = 650;
-const SETTLE_CHECK_DELAYS = [900, 1800, 2700];
-const SETTLE_WINDOW = 3600;
+const INITIAL_REVEAL_DELAY = 600;
+const PRIMARY_SCROLL_DURATION = 2200;
+const CORRECTION_SCROLL_DURATION = 700;
+const SETTLE_WINDOW = 5000;
 const INTERRUPTION_EVENTS = ["wheel", "touchstart", "pointerdown", "keydown"];
 
 function currentHashTarget() {
@@ -16,6 +17,10 @@ function currentHashTarget() {
   }
 }
 
+function smoothStep(progress) {
+  return progress * progress * (3 - (2 * progress));
+}
+
 export function HashScrollManager() {
   useEffect(() => {
     let stopActiveRestoration = () => {};
@@ -26,20 +31,23 @@ export function HashScrollManager() {
       const target = currentHashTarget();
       if (!target) return;
 
+      const reducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
       let stopped = false;
+      let animationFrame;
       let observer;
       const timers = [];
 
-      const alignTarget = (behavior = "instant", force = false) => {
-        if (stopped || !target.isConnected) return;
-        if (force || Math.abs(target.getBoundingClientRect().top) > 1) {
-          target.scrollIntoView({ block: "start", behavior });
-        }
+      const targetTop = () => window.scrollY + target.getBoundingClientRect().top;
+      const queueTimer = (callback, delay) => {
+        const timer = window.setTimeout(callback, delay);
+        timers.push(timer);
+        return timer;
       };
 
       const stop = () => {
         if (stopped) return;
         stopped = true;
+        if (animationFrame) window.cancelAnimationFrame(animationFrame);
         observer?.disconnect();
         timers.forEach((timer) => window.clearTimeout(timer));
         INTERRUPTION_EVENTS.forEach((eventName) => {
@@ -47,53 +55,102 @@ export function HashScrollManager() {
         });
       };
 
+      const watchForLayoutShifts = () => {
+        if (stopped || typeof ResizeObserver !== "function") return;
+
+        observer?.disconnect();
+        let previousHeight = document.body.scrollHeight;
+        observer = new ResizeObserver(() => {
+          const nextHeight = document.body.scrollHeight;
+          const heightChanged = nextHeight !== previousHeight;
+          const displaced = Math.abs(target.getBoundingClientRect().top) > 2;
+          previousHeight = nextHeight;
+          if (displaced && heightChanged) {
+            observer.disconnect();
+            animateToTarget(CORRECTION_SCROLL_DURATION);
+          }
+        });
+        observer.observe(document.body);
+      };
+
+      const animateToTarget = (duration = PRIMARY_SCROLL_DURATION) => {
+        if (stopped || !target.isConnected) return;
+        if (animationFrame) window.cancelAnimationFrame(animationFrame);
+
+        const startY = window.scrollY;
+        const startedAt = window.performance.now();
+
+        const step = (timestamp) => {
+          if (stopped || !target.isConnected) return;
+
+          const progress = Math.min((timestamp - startedAt) / duration, 1);
+          const nextY = startY + ((targetTop() - startY) * smoothStep(progress));
+          window.scrollTo({ top: nextY, left: 0, behavior: "instant" });
+
+          if (progress < 1) {
+            animationFrame = window.requestAnimationFrame(step);
+          } else {
+            animationFrame = undefined;
+            watchForLayoutShifts();
+          }
+        };
+
+        if (reducedMotion || duration <= 0) {
+          window.scrollTo({ top: targetTop(), left: 0, behavior: "instant" });
+          watchForLayoutShifts();
+          return;
+        }
+
+        animationFrame = window.requestAnimationFrame(step);
+      };
+
       stopActiveRestoration = stop;
       INTERRUPTION_EVENTS.forEach((eventName) => {
         window.addEventListener(eventName, stop, { passive: true, once: true });
       });
 
-      const beginLayoutSettling = () => {
-        alignTarget("instant");
-
-        if (typeof ResizeObserver === "function") {
-          let previousHeight = document.body.scrollHeight;
-          observer = new ResizeObserver(() => {
-            const nextHeight = document.body.scrollHeight;
-            if (nextHeight !== previousHeight) {
-              previousHeight = nextHeight;
-              alignTarget("instant");
-            }
-          });
-          observer.observe(document.body);
-        } else {
-          SETTLE_CHECK_DELAYS.slice(1).forEach((delay) => {
-            timers.push(window.setTimeout(() => alignTarget("instant"), delay));
-          });
-        }
-      };
-
       const moveToTarget = () => {
-        alignTarget("smooth", true);
-        timers.push(window.setTimeout(beginLayoutSettling, SETTLE_CHECK_DELAYS[0]));
-        timers.push(window.setTimeout(stop, SETTLE_WINDOW));
+        animateToTarget();
+        queueTimer(stop, PRIMARY_SCROLL_DURATION + SETTLE_WINDOW);
       };
 
-      if (revealPage) {
+      if (revealPage && !reducedMotion) {
         window.scrollTo({ top: 0, left: 0, behavior: "instant" });
-        timers.push(window.setTimeout(moveToTarget, INITIAL_REVEAL_DELAY));
+        queueTimer(moveToTarget, INITIAL_REVEAL_DELAY);
       } else {
         moveToTarget();
       }
     };
 
     const onHashChange = () => restoreHashPosition();
+    const onDocumentClick = (event) => {
+      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+
+      const link = event.target.closest?.("a[href]");
+      if (!link) return;
+
+      const destination = new URL(link.href, window.location.href);
+      const samePage = destination.origin === window.location.origin
+        && destination.pathname === window.location.pathname
+        && destination.search === window.location.search;
+
+      if (!samePage || !destination.hash) return;
+
+      event.preventDefault();
+      if (window.location.hash !== destination.hash) {
+        window.history.pushState(null, "", destination.hash);
+      }
+      restoreHashPosition();
+    };
 
     restoreHashPosition({ revealPage: true });
     window.addEventListener("hashchange", onHashChange);
+    document.addEventListener("click", onDocumentClick);
 
     return () => {
       stopActiveRestoration();
       window.removeEventListener("hashchange", onHashChange);
+      document.removeEventListener("click", onDocumentClick);
     };
   }, []);
 

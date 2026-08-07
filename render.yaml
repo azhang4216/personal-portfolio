@@ -16,7 +16,7 @@ services:
       - key: BOOKING_OWNER_EMAIL
         value: angela@pier-finance.com
       - key: BOOKING_DEFAULT_TIME_ZONE
-        value: America/Vancouver
+        value: America/Los_Angeles
       - key: BOOKING_MIN_NOTICE_MINUTES
         value: "120"
       - key: BOOKING_MAX_ADVANCE_DAYS

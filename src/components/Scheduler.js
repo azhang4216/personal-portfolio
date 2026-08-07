@@ -3,10 +3,10 @@ import { ArrowIcon, CalendarIcon, CheckIcon, ClockIcon, GitHubIcon, GlobeIcon, L
 import { LINKS } from "../data/portfolio";
 
 const API_URL = (process.env.REACT_APP_SCHEDULING_API_URL || "").replace(/\/$/, "");
-const DEFAULT_TIME_ZONE = "America/Vancouver";
+const DEFAULT_TIME_ZONE = "America/Los_Angeles";
 const COMMON_TIME_ZONES = [
-  "America/Vancouver",
   "America/Los_Angeles",
+  "America/Vancouver",
   "America/Denver",
   "America/Chicago",
   "America/New_York",

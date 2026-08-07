@@ -41,7 +41,7 @@ The service listens on `PORT` or `8787` and exposes:
 
 - `GET /v1/health`
 - `GET /v1/github/contributions`
-- `GET /v1/availability?duration=15&timeZone=America%2FVancouver`
+- `GET /v1/availability?duration=15&timeZone=America%2FLos_Angeles`
 - `POST /v1/book`
 
 ## Render

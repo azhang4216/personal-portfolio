@@ -21,7 +21,7 @@ const config = {
   port: numberFromEnv("PORT", 8787),
   allowedOrigins: new Set((process.env.ALLOWED_ORIGINS || "http://localhost:3000,https://angela-zhang.org,https://www.angela-zhang.org").split(",").map((value) => value.trim()).filter(Boolean)),
   ownerEmail: process.env.BOOKING_OWNER_EMAIL || "angela@pier-finance.com",
-  ownerTimeZone: process.env.BOOKING_DEFAULT_TIME_ZONE || "America/Vancouver",
+  ownerTimeZone: process.env.BOOKING_DEFAULT_TIME_ZONE || "America/Los_Angeles",
   workingHours: parseWorkingHours(process.env.BOOKING_WORKING_HOURS_JSON),
   minNoticeMinutes: numberFromEnv("BOOKING_MIN_NOTICE_MINUTES", 120),
   maxAdvanceDays: numberFromEnv("BOOKING_MAX_ADVANCE_DAYS", 21),

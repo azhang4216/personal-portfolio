@@ -9,26 +9,10 @@ const NAV_ITEMS = [
 ];
 
 export function SiteHeader() {
-  const [visible, setVisible] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
-  const lastScroll = useRef(0);
   const menuRef = useRef(null);
   const triggerRef = useRef(null);
   const wasOpen = useRef(false);
-
-  useEffect(() => {
-    const onScroll = () => {
-      const current = window.scrollY;
-      const delta = current - lastScroll.current;
-
-      if (current < 80 || delta < -8) setVisible(true);
-      if (current > 120 && delta > 8 && !menuOpen) setVisible(false);
-      lastScroll.current = current;
-    };
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [menuOpen]);
 
   useEffect(() => {
     document.body.classList.toggle("menu-open", menuOpen);
@@ -62,7 +46,7 @@ export function SiteHeader() {
 
   return (
     <>
-      <header className={`site-header ${visible || menuOpen ? "is-visible" : "is-hidden"}`}>
+      <header className="site-header is-visible">
         <div className="header-shell">
           <a className="az-mark desktop-mark" href="/" aria-label="Angela Zhang, back to top"><GolfFlagMark /></a>
           <nav className="desktop-nav" aria-label="Primary navigation">
