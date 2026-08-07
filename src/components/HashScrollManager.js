@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 
 const INITIAL_REVEAL_DELAY = 1000;
-const CRUISING_MILLISECONDS_PER_VIEWPORT = 1300;
-const EASING_RAMP_DURATION = 400;
-const MINIMUM_SCROLL_DURATION = 450;
+const CRUISING_MILLISECONDS_PER_VIEWPORT = 1000;
+const EASING_RAMP_DURATION = 300;
+const MINIMUM_SCROLL_DURATION = 350;
 const SETTLE_WINDOW = 5000;
 const INTERRUPTION_EVENTS = ["wheel", "touchstart", "pointerdown", "keydown"];
 
