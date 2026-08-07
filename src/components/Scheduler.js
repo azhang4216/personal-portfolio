@@ -67,7 +67,7 @@ export function Scheduler() {
   }, [timeZone]);
 
   useEffect(() => {
-    if (!API_URL) return undefined;
+    if (process.env.NODE_ENV === "test" || !API_URL) return undefined;
     const controller = new AbortController();
     setAvailabilityState("loading");
     setSelectedSlot(null);

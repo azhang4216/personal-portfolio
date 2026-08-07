@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import App from './App';
 
 test('renders the recruiter portfolio and primary sections', () => {
@@ -25,4 +25,30 @@ test('renders the recruiter portfolio and primary sections', () => {
   fireEvent.click(customer);
   expect(customer).toHaveClass('active');
   expect(customer).toHaveAttribute('aria-pressed', 'true');
+});
+
+test('restores a direct section link after the React app mounts', async () => {
+  const originalScrollIntoView = HTMLElement.prototype.scrollIntoView;
+  const originalScrollTo = window.scrollTo;
+  const scrollIntoView = jest.fn();
+  const scrollTo = jest.fn();
+  HTMLElement.prototype.scrollIntoView = scrollIntoView;
+  window.scrollTo = scrollTo;
+  window.history.replaceState({}, '', '/#connect');
+
+  const { unmount } = render(<App />);
+
+  expect(scrollTo).toHaveBeenCalledWith({ top: 0, left: 0, behavior: 'instant' });
+  await waitFor(() => {
+    expect(scrollIntoView).toHaveBeenCalledWith({ block: 'start', behavior: 'smooth' });
+  });
+
+  unmount();
+  window.history.replaceState({}, '', '/');
+  if (originalScrollIntoView) {
+    HTMLElement.prototype.scrollIntoView = originalScrollIntoView;
+  } else {
+    delete HTMLElement.prototype.scrollIntoView;
+  }
+  window.scrollTo = originalScrollTo;
 });
